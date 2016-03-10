@@ -1,0 +1,15 @@
+<%
+base_opts = '--format progress --strict --tags ~@wip'
+std_opts = base_opts + ' --format rerun --out rerun.txt --tags ~@setup'
+html_opts = ' --format html --out results.html'
+pretty_opts = ' --format pretty --out results.txt'
+verify_opts = std_opts + ' --tags ~@open_defect'
+test_opts = std_opts + ' --tags @test'
+%>
+base: <%= base_opts %> features
+default: <%= base_opts %> features
+wip: --tags @wip:3 --wip features
+rerun: '--format progress @rerun.txt'
+verify: <%= verify_opts %> features
+setup: '--format pretty --tags @setup'
+test: <%= test_opts %> features
